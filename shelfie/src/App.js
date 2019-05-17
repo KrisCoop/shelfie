@@ -1,26 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+
 import './App.css';
+import Header from './Components/Header/Header.js';
+import Form from './Components/Form/Form.js';
+import Dashboard from './Components/Dashboard/Dashboard.js';
+import axios from 'axios';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+  constructor(props){
+    super(props)
+
+    this.state = {
+      list: [
+        {
+          name: 'roadkill',
+          price: 5.99,
+          photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_YnOeUPVmR8XkRnTgxVz0fQ3D2hxsAtIbJ__NquA0sldFPfU4'
+        },
+        {
+          name: 'hobo toothbrush',
+          price: 6.99,
+          photo: 'https://upload.wikimedia.org/wikipedia/commons/0/03/Pine_cone_1.jpg'
+
+        },
+        {
+          name: 'my hopes and dreams',
+          price: 0.01,
+          photo: 'https://i.imgflip.com/2sh81.jpg?a432744'
+        }
+      ]
+    };
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:8060/api/inventory').then((res)=>{
+      console.log(res.data)
+      // this.setState({
+      //   list: res.data
+      // })
+    })
+  }
+
+  render() {
+    return (
+      <div className="MainDiv">
+        <Header />
+        <Form />
+        <Dashboard list={this.state.list}/>
+
+     </div>
+    );
+  }
 }
-
 export default App;
