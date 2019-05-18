@@ -42,8 +42,8 @@ class Form extends Component{
                         <label><input className="productName" placeholder="Product Name" name="productName" value={this.state.productName} onChange={this.updateInput}></input></label>
                         <label><input className="price" placeholder="Price" name="price" value={this.state.price} onChange={this.updatePrice}></input></label>
                     </div>
-                    <button className="Cancel" onClick={()=>{}}>Cancel</button>
-                    <button className="AddToInventory" onClick={()=>{}}>Add to Inventory</button>
+                    <button className="Cancel" onClick={()=>{this.cancelInput}}>Cancel</button>
+                    <button className="AddToInventory" onClick={()=>{this.props.addItem(this.state)}}>Add to Inventory</button>
                 </div>               
             </div>
         )

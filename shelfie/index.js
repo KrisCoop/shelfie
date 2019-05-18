@@ -8,7 +8,7 @@ const axios = require('axios');
 
 const app = express();
 
-const controller = require('./controller');
+const controller = require('./server/controller');
 
 
 app.use(cors());
@@ -25,8 +25,9 @@ massive(process.env.CONNECTION_STRING)
 
 // end points go here guy.
 app.get('/api/inventory', controller.get);
+app.post('/api/inventory', controller.add);
 
-const port = process.env.PORT || 8060;
+const port = process.env.PORT || 8080;
 
 app.listen(port, ()=>{
     console.log(`running on port ${port}`)

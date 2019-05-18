@@ -34,10 +34,17 @@ class App extends Component{
 
   componentDidMount() {
     axios.get('http://localhost:8060/api/inventory').then((res)=>{
-      console.log(res.data)
-      // this.setState({
-      //   list: res.data
-      // })
+      this.setState({
+        list: res.data
+      })
+    })
+  }
+
+  addItem = (obj) => {
+    axios.post('http://localhost:8060/api/inventory', obj).then((res)=>{
+      this.setState({
+        list: res.data
+      })
     })
   }
 
@@ -45,7 +52,7 @@ class App extends Component{
     return (
       <div className="MainDiv">
         <Header />
-        <Form />
+        <Form addItem={this.addItem}/>
         <Dashboard list={this.state.list}/>
 
      </div>
